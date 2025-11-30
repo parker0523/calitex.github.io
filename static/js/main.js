@@ -590,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function () {
           slideDiv.className = 'swiper-slide model-card';
           
           const modelViewer = document.createElement('model-viewer');
-          const modelUrl = `https://lumitex-pbr.github.io/Assets/static/glbs/${trimmedName}.glb`;
+          const modelUrl = `./static/glbs/${trimmedName}.glb`;
           console.log(`🌐 Model URL: ${modelUrl}`);
           
           modelViewer.src = modelUrl;
@@ -600,7 +600,20 @@ document.addEventListener('DOMContentLoaded', function () {
           modelViewer.setAttribute('rotation-per-second', '20deg');
           modelViewer.setAttribute('background-color', '#ffffff');
           modelViewer.setAttribute('interaction-prompt', 'none');
+          // Don't set environment-image to allow default lighting
           modelViewer.style.cssText = 'width: 100%; height: 300px;';
+          
+          // Add debug logging
+          modelViewer.addEventListener('model-visibility', (event) => {
+            console.log(`👁️ Model ${trimmedName} visibility changed:`, event.detail);
+          });
+          
+          modelViewer.addEventListener('progress', (event) => {
+            const progress = event.detail.totalProgress;
+            if (progress === 1) {
+              console.log(`⏳ Model ${trimmedName} fully loaded`);
+            }
+          });
           
           modelViewer.addEventListener('load', () => {
             console.log(`✅ Model ${trimmedName} loaded successfully`);
@@ -608,6 +621,7 @@ document.addEventListener('DOMContentLoaded', function () {
           
           modelViewer.addEventListener('error', (event) => {
             console.error(`❌ Failed to load model ${trimmedName}:`, event);
+            console.error(`Model path: ${modelUrl}`);
             slideDiv.innerHTML = `
               <div style="
                 width: 100%; 

@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="LumiTex: Towards High-Fidelity PBR Texture Generation with Illumination Context">
-  <meta name="keywords" content="Robotic, 3D Object Generation, 3D Scene Generation, 3D World Generation, PBR Texture Generation, ...">
+        content="CaliTex: Geometry-Calibrated Attention for View-Coherent 3D Texture Generation">
+  <meta name="keywords" content="3D Texture Generation, Diffusion Models, Geometry-Calibrated Attention, View Coherence, ...">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LumiTex: Towards High-Fidelity PBR Texture Generation with Illumination Context</title>
+  <title>CaliTex: Geometry-Calibrated Attention for View-Coherent 3D Texture Generation</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -18,10 +18,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.24/dist/css/bulma-carousel.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.5/dist/css/bulma-slider.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.1/css/fontawesome.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css" />
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="stylesheet" href="./static/css/main.css">
-  <link rel="icon" href="./static/imgs/lumitex_icon_v3.png">
+  <link rel="icon" href="./static/imgs/icon.jpg">
 
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -42,96 +42,109 @@
   
   <!-- Plyr Video Player CSS -->
   <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+  
+  <style>
+    body, html {
+      background: white !important;
+    }
+    .section {
+      background: white !important;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Full-screen Teaser Background Section -->
-<section class="teaser-hero">
-  <div class="teaser-background"></div>
-  <div class="teaser-overlay"></div>
-  <div class="teaser-content">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-
-          <div style="display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 100%; margin-top: -80px;">
-            <img src="./static/imgs/lumitex_logo_v2.png" alt="Logo" style="height: 5cm; margin-bottom: 1rem; margin-left: 2rem;"/>
-            <h1 class="title is-1 publication-title" style="margin: 0; font-size: 2.2rem; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
-              <span style="display: block; font-size: 0.95em; margin-top: -2.2em;">
-                Towards High-Fidelity <span style="font-weight: bold; text-shadow: 0 2px 8px rgba(37, 99, 235, 0.4), 0 0 15px rgba(255, 255, 255, 0.8); background: linear-gradient(135deg, #2563eb, #60a5fa, #ffffff, #dbeafe); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-size: 300% 300%; animation: shimmer 3s ease-in-out infinite;">PBR</span> Texture Generation<br>with Illumination Context
-              </span>
-            </h1>
-          </div>
-
-          <!-- Product Introduction -->
-          <div class="product-intro">
-            <span style="color: white; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);">TL;DR: A product-ready level PBR texture generation method</span>
-          </div>
-
-          <div class="is-size-5 publication-authors" style="color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
-            Anonymous Authors
-          </div>
-          <div class="btn-group">
-            <a href="#" disabled data-tooltip="Coming soon!">
-              <i class="ai ai-arxiv"></i>arXiv
-            </a>
-            <a href="#product-demo" onclick="
-              event.preventDefault();
-              document.getElementById('product-demo').scrollIntoView({behavior: 'smooth', block: 'start'});
-            ">
-              <i class="fab fa-youtube"></i>Video
-            </a>
-            <a href="#" disabled data-tooltip="Coming soon!">
-              <i class="fab fa-github"></i>Code
-            </a>
-          </div>
+<!-- Header Section with Title and Teaser -->
+<section class="hero" style="padding: 2.5rem 1.5rem 1rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column has-text-centered">
+        <h1 class="title is-1 publication-title" style="margin-bottom: 1rem; color: #1a202c;">
+          CaliTex: Geometry-Calibrated Attention for View-Coherent 3D Texture Generation
+        </h1>
+        
+        <!-- Authors -->
+        <div class="is-size-5 publication-authors" style="margin-top: 0.8rem; line-height: 1.8; font-size: 1.3rem;">
+          <span style="display: inline-block;">
+            <a href="#" style="color: inherit; text-decoration: none;">Chenyu Liu</a><sup>1</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Hongze Chen</a><sup>2</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Jingzhi Bao</a><sup>3</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Lingting Zhu</a><sup>4</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Runze Zhang</a><sup>5</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Weikai Chen</a><sup>5</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Zeyu Hu</a><sup>5</sup>,&nbsp;<br>
+            <a href="#" style="color: inherit; text-decoration: none;">Yingda Yin</a><sup>5</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Keyang Luo</a><sup>5</sup>,&nbsp;
+            <a href="#" style="color: inherit; text-decoration: none;">Xin Wang</a><sup>5</sup>
+          </span>
+        </div>
+        <div class="is-size-6 publication-affiliations" style="margin-top: 0.2rem; color: #666; font-size: 1.1rem;">
+          <sup>1</sup>PKU, <sup>2</sup>HKUST, <sup>3</sup>CUHK(SZ), <sup>4</sup>HKU, <sup>5</sup>LIGHTSPEED
+        </div>
+        
+        <!-- Buttons -->
+        <div class="btn-group" style="margin-top: 1.2rem;">
+          <a href="https://arxiv.org/abs/2511.21309" target="_blank" rel="noopener noreferrer">
+            <i class="ai ai-arxiv"></i>arXiv
+          </a>
+          <a href="https://github.com/parker0523/CaliTex" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-github"></i>Code
+          </a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="main-section" id="product-demo" style="margin-top: -40px;">
-  <div class="container-custom">
-    <h2 class="title is-3 has-text-centered" style="margin-bottom: 2rem;">Product Demo</h2>
-    
-    <div style="max-width: 2560px; margin: 0 auto; position: relative;">
-      <video class="plyr-video" playsinline controls
-             style="width: 100%; height: auto; display: block; margin: 0 auto;"
-             data-plyr-config='{"autopause": false, "resetOnEnd": true, "volume": 0.2, "autoplay": false}'>
-        <source src="https://pub-c10642aa1622487494ec3b1e78baea5b.r2.dev/LumiTex_demo_h264_fps60_2k_anoymous.mp4" type="video/mp4">
-        <p>Your browser does not support the video playback.</p>
-      </video>
-      
-      <div style="
-        position: absolute;
-        bottom: -25px;
-        right: 0;
-        text-align: right;
-      ">
-        <p style="color: #d1d5db; font-size: 0.75em; font-weight: 400; margin: 0;">
-          Video not loading? <a href="https://pub-c10642aa1622487494ec3b1e78baea5b.r2.dev/LumiTex_demo_h264_fps60_2k_anoymous.mp4" target="_blank" rel="noopener" style="color: #9ca3af; text-decoration: none; border-bottom: 1px dotted #d1d5db;">direct link</a>.
-        </p>
+<!-- Teaser Image - Full Width Section -->
+<section style="padding: 0; background: white; margin-top: 1.5rem;">
+  <div class="container" style="max-width: 1200px;">
+    <div style="margin: 0 auto; max-width: 100%; padding: 0 2rem;">
+      <img src="./static/imgs/teaser_down.png" alt="CaliTex Teaser" style="width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);" />
+    </div>
+  </div>
+</section>
+
+<!-- Abstract Section -->
+<section class="section" style="padding-top: 3.5rem; background: white;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Abstract</h2>
+        <div class="content" style="text-align: justify; font-family: 'Google Sans', 'Segoe UI', system-ui, -apple-system, sans-serif; font-size: 1.1rem; line-height: 1.8; color: #2d3748;">
+          <p>
+            Despite major advances brought by diffusion-based models, current 3D texture generation systems remain hindered by cross-view inconsistency -- textures that appear convincing from one viewpoint often fail to align across others. We find that this issue arises from attention ambiguity, where unstructured full attention is applied indiscriminately across tokens and modalities, causing geometric confusion and unstable appearance-structure coupling. To address this, we introduce CaliTex, a framework of geometry-calibrated attention that explicitly aligns attention with 3D structure. It introduces two modules: Part-Aligned Attention that enforces spatial alignment across semantically matched parts, and Condition-Routed Attention which routes appearance information through geometry-conditioned pathways to maintain spatial fidelity. Coupled with a two-stage diffusion transformer, CaliTex makes geometric coherence an inherent behavior of the network rather than a byproduct of optimization. Empirically, CaliTex produces seamless and view-consistent textures and outperforms both open-source and commercial baselines.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<!-- Method Section -->
+<section class="section" style="background: white; padding-top: 1.5rem;">
   <div class="container is-max-desktop">
-      <!-- Method Section -->
-      <div class="columns is-centered has-text-centered">
-      <div class="container-custom">
-        <h2 class="title is-3" style="margin-top: -130px;">Results</h2>
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Method</h2>
+        <div class="content has-text-centered">
+          <img src="./static/imgs/pipeline_new.jpg" alt="Method Pipeline" style="width: 100%; max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);" />
+          <p style="margin-top: 1rem; text-align: justify; font-size: 0.95rem; line-height: 1.6; color: #4a5568; padding: 0 1rem;">
+            <strong>Overview of our method.</strong> (a) We employ a two-stage generation framework: the Single-View DiT captures intra-view correlations, while the Multi-View DiT enhances geometric alignment and cross-view consistency using (b) Condition-Routed Attention and (c) Part-Aligned Attention. The generated multi-view images are then projected back and inpainted to produce the final 3D texture.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="main-section" id="product-demo" style="margin-top: 0; padding-top: 1.5rem; background: white;">
+  <div class="container-custom">
+    <h2 class="title is-3 has-text-centered" style="margin-bottom: 2rem;">Results</h2>
         <div class="content has-text-justified">
           <div style="display: flex; align-items: center; gap: 12px;">
-            <div class="btn-group" style="margin-top: 2px; margin-bottom: 4px;">
-              <a href="#" disabled data-tooltip="Coming soon!">
-                <i class="huggingface-icon"></i> Demo
-              </a>
-            </div>
             <h3 class="title is-4" style="margin: 0;">Textured 3D Models</h3>
-            <p style="color: #666; font-size: 0.9em; margin: 0;">(Gallery of textured meshes generated by LumiTex • ~20MB each)</p>
+            <p style="color: #666; font-size: 0.9em; margin: 0;">(Gallery of textured meshes generated by CaliTex • ~20MB each)</p>
           </div>
           
           <div class="swiper-container swiper1" style="max-width: 1400px; margin: 0 auto;">
@@ -160,7 +173,7 @@
               opacity: 0.7;
             ">
               <i class="fas fa-cube" style="font-size: 1em; opacity: 0.6;"></i>
-              <span style="font-weight: 500; letter-spacing: 0.02em;">Mesh: Objaverse/Hunyuan2.5</span>
+              <span style="font-weight: 500; letter-spacing: 0.02em;">Mesh: Hunyuan3D-3.0/riot</span>
             </div>
             <div class="drag-hint" style="
               position: absolute;
@@ -185,171 +198,24 @@
             <span>Use navigation buttons or click models to explore</span>
           </div> -->
           
-          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 40px;">Comparison with Texture Generation Methods</h3>
-          <img src="./static/imgs/fig-comp_texture_4k_compressed.png" alt="Texture Comparison" />
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 40px;">Qualitative comparison with recent methods</h3>
+          <img src="./static/imgs/comp_new.jpg" alt="Qualitative Comparison" style="width: 100%; max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);" />
 
-          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 40px;">Comparison with PBR Generation Methods</h3>
-          <img src="./static/imgs/fig-pbr_comp_4k_compressed.png" alt="PBR Comparison" />
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 40px;">More Visual Results</h3>
+          <img src="./static/imgs/suppl_1_hightlight.jpg" alt="More Visual Results" style="width: 100%; max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);" />
 
-          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 40px;">Texture Inpainting</h3>
-          <img src="./static/imgs/fig-inpaint_4k_compressed.png" alt="Texture Inpainting" />
-
-          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 20px;">Relighting</h3>
-          <img src="./static/imgs/fig-relight_compressed.png" alt="Relighting" />
-
-          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 20px;">Generation Diversity</h3>
-          <img src="./static/imgs/fig-diversity_compressed.png" alt="Diversity" />
-
-          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 20px;">PBR-to-NPR Stylization</h3>
-          
-          <div class="stylization-showcase" style="
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0px 0px;
-            min-height: 500px;
-            background: url('./static/imgs/nprstyle_background.png');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            background-position: center;
-            opacity: 1.0;
-          ">
-            <div class="aux-card top-left" style="
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 240px;
-              height: 240px;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              background: #fff;
-            ">
-              <model-viewer 
-                src="https://lumitex-pbr.github.io/Assets/static/glbs/nprstyle_01.glb" 
-                alt="Auxiliary model 1" 
-                auto-rotate 
-                camera-controls 
-                rotation-per-second="15deg" 
-                background-color="#ffffff" 
-                interaction-prompt="none"
-                style="width: 100%; height: 100%;">
-              </model-viewer>
-            </div>
-
-            <div class="aux-card top-right" style="
-              position: absolute;
-              top: 0;
-              right: 0;
-              width: 240px;
-              height: 240px;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              background: #fff;
-            ">
-              <model-viewer 
-                src="https://lumitex-pbr.github.io/Assets/static/glbs/nprstyle_03.glb" 
-                alt="Auxiliary model 2" 
-                auto-rotate 
-                camera-controls 
-                rotation-per-second="15deg" 
-                background-color="#ffffff" 
-                interaction-prompt="none"
-                style="width: 100%; height: 100%;">
-              </model-viewer>
-            </div>
-
-            <div class="main-card center" style="
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              width: 280px;
-              height: 280px;
-              border-radius: 16px;
-              overflow: hidden;
-              box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-              background: #fff;
-              border: 3px solid rgba(99, 102, 241, 0.2);
-              z-index: 10;
-            ">
-              <model-viewer 
-                src="https://lumitex-pbr.github.io/Assets/static/glbs/nprstyle_00.glb" 
-                alt="Main stylized model" 
-                auto-rotate 
-                camera-controls 
-                rotation-per-second="20deg" 
-                background-color="#ffffff" 
-                interaction-prompt="none"
-                style="width: 100%; height: 100%;">
-              </model-viewer>
-            </div>
-
-            <div class="aux-card bottom-left" style="
-              position: absolute;
-              bottom: 0;
-              left: 0;
-              width: 240px;
-              height: 240px;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              background: #fff;
-            ">
-              <model-viewer 
-                src="https://lumitex-pbr.github.io/Assets/static/glbs/nprstyle_02.glb" 
-                alt="Auxiliary model 3" 
-                auto-rotate 
-                camera-controls 
-                rotation-per-second="15deg" 
-                background-color="#ffffff" 
-                interaction-prompt="none"
-                style="width: 100%; height: 100%;">
-              </model-viewer>
-            </div>
-
-            <div class="aux-card bottom-right" style="
-              position: absolute;
-              bottom: 0;
-              right: 0;
-              width: 240px;
-              height: 240px;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-              background: #fff;
-            ">
-              <model-viewer 
-                src="https://lumitex-pbr.github.io/Assets/static/glbs/nprstyle_04.glb" 
-                alt="Auxiliary model 4" 
-                auto-rotate 
-                camera-controls 
-                rotation-per-second="15deg" 
-                background-color="#ffffff" 
-                interaction-prompt="none"
-                style="width: 100%; height: 100%;">
-              </model-viewer>
-            </div>
+          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 40px;">BibTeX</h3>
+          <div style="background-color: #f5f5f5; border-radius: 8px; padding: 1.5rem; margin-top: 1rem;">
+            <pre style="background-color: transparent; border: none; padding: 0; margin: 0; font-size: 0.85em; line-height: 1.6; overflow-x: auto;"><code>@misc{liu2025calitexgeometrycalibratedattentionviewcoherent,
+      title={CaliTex: Geometry-Calibrated Attention for View-Coherent 3D Texture Generation}, 
+      author={Chenyu Liu and Hongze Chen and Jingzhi Bao and Lingting Zhu and Runze Zhang and Weikai Chen and Zeyu Hu and Yingda Yin and Keyang Luo and Xin Wang},
+      year={2025},
+      eprint={2511.21309},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2511.21309}, 
+}</code></pre>
           </div>
-          
-          <p style="
-            font-size: 0.825rem; 
-            font-weight: 400;
-            color: #64748b; 
-            font-style: italic; 
-            margin-top: 20px; 
-            margin-bottom: 0; 
-            text-align: left; 
-            line-height: 1.6;
-            letter-spacing: 0.01em;
-          ">
-            * PBR-to-NPR stylization refers to converting physically-based rendered (PBR) materials, which aim for photorealism, into non-photorealistic (NPR) styles, such as toon shading, or hand-painted appearances. This process reinterprets realistic lighting and material cues into artistic, stylized visuals for applications like animation or games.
-          </p>
-
-          <h3 class="title is-4 has-text-centered" style="margin-bottom: 12px; margin-top: 24px;">Qualitative Comparisons</h3>
-          <img src="./static/imgs/fig-table_results.png" alt="Qualitative Comparisons" />
 
         </div>
       </div>
@@ -373,9 +239,15 @@
     <div class="columns is-centered">
       <div class="column is-8">
         <div class="content" style="font-size: 0.8em; color: #999; text-align: center; line-height: 1.4;">
-          <div style="margin-bottom: 0.5rem;">LumiTex: Towards High-Fidelity PBR Texture Generation with Illumination Context</div>
-          <div style="font-size: 0.9em; opacity: 0.7; display: flex; justify-content: center; align-items: center; position: relative;">
-            <span>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color: #aaa; text-decoration: none;">CC-BY-NC-SA 4.0</a>
+          <div style="margin-bottom: 0.5rem;">CaliTex: Geometry-Calibrated Attention for View-Coherent 3D Texture Generation</div>
+          <div style="font-size: 0.9em; opacity: 0.7; margin-bottom: 0.5rem;">
+            <span>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color: #aaa; text-decoration: none;">CC-BY-NC-SA 4.0</a></span>
+          </div>
+          <div style="font-size: 0.85em; opacity: 0.7; margin-bottom: 0.5rem;">
+            All Riot Games assets used in this project are under Riot Games' "Legal Jibber Jabber" policy.
+          </div>
+          <div style="font-size: 0.85em; opacity: 0.7;">
+            Website template has been borrowed from <a href="https://lumitex.vercel.app/" style="color: #aaa; text-decoration: none;">LumiTex</a>.
           </div>
         </div>
       </div>

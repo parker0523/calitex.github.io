@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #f9fafe, #eaf3ff);
+  background: white;
   color: #222;
 }
 
@@ -25,6 +25,8 @@ body {
 .hero {
   padding: 3rem 1.5rem 2rem;
   text-align: center;
+  background: white;
+  margin-bottom: 2rem;
 }
 
 .hero img {
@@ -50,6 +52,19 @@ body {
   font-size: 0.95rem;
   color: #555;
   margin-top: 1rem;
+}
+
+/* Author links styling */
+.publication-authors a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.publication-authors a:hover {
+  color: #5b7fff;
+  border-bottom-color: #5b7fff;
 }
 
 .author-block {
@@ -1228,7 +1243,8 @@ hr.gray {
   opacity: 0.95;
 }
 
-/* 全屏Teaser Hero Section */
+/* 移除旧的全屏Teaser Hero样式 - 现在使用简单的header */
+/*
 .teaser-hero {
   position: relative;
   height: 100vh;
@@ -1249,7 +1265,6 @@ hr.gray {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  /* 灰度淡化效果 */
   filter: grayscale(0.3) brightness(0.7) contrast(1.1);
   z-index: 1;
 }
@@ -1260,7 +1275,6 @@ hr.gray {
   left: 0;
   width: 100%;
   height: 100%;
-  /* 渐变遮罩层，增强文字可读性 */
   background: linear-gradient(
     135deg,
     rgba(0, 0, 0, 0.4) 0%,
@@ -1278,7 +1292,6 @@ hr.gray {
   text-align: center;
 }
 
-/* 调整在teaser背景上的文字样式 */
 .teaser-hero .title {
   color: white;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
@@ -1296,7 +1309,6 @@ hr.gray {
   backdrop-filter: blur(5px);
 }
 
-/* 按钮在teaser背景上的样式增强 */
 .teaser-hero .btn-group a {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(91, 127, 255, 0.2);
   backdrop-filter: blur(5px);
@@ -1306,7 +1318,6 @@ hr.gray {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(91, 127, 255, 0.3);
 }
 
-/* 响应式设计 */
 @media (max-width: 768px) {
   .teaser-hero {
     min-height: 500px;
@@ -1335,11 +1346,11 @@ hr.gray {
   }
 }
 
-/* 为后续内容调整margin */
 .main-section:first-of-type {
   margin-top: 0;
   padding-top: 4rem;
 }
+*/
 
 /* Plyr 全屏修复 */
 .plyr--fullscreen-active {
